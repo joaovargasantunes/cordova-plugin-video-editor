@@ -533,6 +533,10 @@
     float newHeight = image.size.height * scaleFactor;
     float newWidth = oldWidth * scaleFactor;
 
+    if (isnan(newWidth) || isnan(newHeight) || newWidth <= 0 || newHeight <= 0) {
+        NSLog(@"❌ Dimensões inválidas para redimensionamento: %.2f x %.2f", newWidth, newHeight);
+        return nil;
+    }
     UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight));
     [image drawInRect:CGRectMake(0, 0, newWidth, newHeight)];
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
